@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{#if professor}}Edit Professor {{professor.name}}{{else}}Add New Professor{{/if}}</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="form" action="/data/{{#if professor}}edit{{else}}add{{/if}}" enctype="multipart/form-data">
+                    <input type="hidden" id="id" name="id" value="{{professor.id}}" />
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group">
+                                <span class="input-group-text">Name</span>
+                                <input class="form-control form-control-lg" name="name" placeholder="" autocomplete="off" value="{{professor.name}}" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group">
+                                <span class="input-group-text">Email</span>
+                                <input class="form-control form-control-lg" type="email" name="email" placeholder="" autocomplete="off" value="{{professor.email}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group">
+                                <span class="input-group-text">Hours</span>
+                                <input class="form-control form-control-lg" name="hours" placeholder="" autocomplete="off" value="{{professor.hours}}" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group">
+                                <span class="input-group-text">Room</span>
+                                <input class="form-control form-control-lg" name="room" placeholder="" autocomplete="off" value="{{professor.room}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group">
+                                <span class="input-group-text">Phone</span>
+                                <input class="form-control form-control-lg" name="phone" placeholder="" autocomplete="off" value="{{professor.phone}}" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group">
+                                <span class="input-group-text">Website</span>
+                                <input class="form-control form-control-lg" name="website" placeholder="" autocomplete="off" value="{{professor.website}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group">
+                                <span class="input-group-text">Department</span>
+                                <!-- create a select to add the department -->
+                                <select class="form-control form-control-lg" id="department" name="department">
+                                    <option value="">Select a Department</option>
+                                    {{#each departments}}
+                                    <option value="{{this.short_name}}" {{#if ../professor}}{{#ifCond ../professor.department this.short_name}}selected{{/ifCond}}{{/if}}>{{this.name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                            <a href="/data/manage" class="btn btn-secondary">Back</a>
+                            {{#if professor}}
+                            <button type="button" id="delete" onclick="deleteProfessor()" class="btn btn-danger">Delete</button>
+                            {{/if}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("submit").addEventListener("click", function (event) {
+        var department = document.getElementById("department").value;
+        if (department == "") {
+            event.preventDefault();
+            alert("Please select a department");
+        }
+    });
+</script>

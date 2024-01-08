@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{#if userToEdit}}Edit User {{userToEdit.name}}{{else}}Add New User{{/if}}</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/users/{{#if userToEdit}}edit{{else}}add{{/if}}" enctype="multipart/form-data" >
+                    {{#ifEquals userToEdit.id user.id}}
+                        You cannot edit your own user
+                    {{else}}
+                        <input type="hidden" id="id" name="id" value="{{userToEdit.id}}" />
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">Name</span>
+                                    <input class="form-control form-control-lg" name="name" placeholder="" autocomplete="off" value="{{userToEdit.name}}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-6 col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">Email</span>
+                                    <input class="form-control form-control-lg" type="email" name="email" placeholder="" autocomplete="off" value="{{userToEdit.email}}" />
+                                </div>
+                            </div>
+                        </div>
+                    {{/ifEquals}}
+                    <div class="row mt-3">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <a href="/users/manage" class="btn btn-secondary">Back</a>
+                            {{#ifEquals userToEdit.id user.id}}
+
+                            {{else}}
+                                {{#if userToEdit}}
+                                    <button type="button" id="delete" onclick="deleteUser()" class="btn btn-danger">Delete</button>
+                                {{/if}}
+                            {{/ifEquals}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    {{#if userToEdit}}
+        function deleteUser() {
+            window.location.pathname = '/users/delete/{{userToEdit.id}}'
+        }
+    {{/if}}
+</script>

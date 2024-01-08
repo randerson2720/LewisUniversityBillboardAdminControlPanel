@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{#if banner}}Edit Banner {{banner.name}}{{else}}Add New Banner{{/if}}</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/banners/{{#if banner}}edit{{else}}add{{/if}}" enctype="multipart/form-data" >
+                    <input type="hidden" id="id" name="id" value="{{banner.id}}" />
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text">Name</span>
+                                <input class="form-control form-control-lg" name="name" placeholder="" autocomplete="off" value="{{banner.name}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="input-group">
+                                <input class="form-control form-control-lg" type="file" name="file" id="file" accept="image/gif, image/jpeg, image/png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <button type="submit" id="submit" class="btn btn-primary" {{#if banner}}{{else}}disabled{{/if}}>Save</button>
+                            <a href="/banners/manage" class="btn btn-secondary">Back</a>
+                            {{#if banner}}
+                                <button type="button" id="delete" onclick="deleteBanner()" class="btn btn-danger">Delete</button>
+                            {{/if}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{#section 'footer'}}
+<script>
+    {{#if banner }}
+        function deleteBanner() {
+            window.location.pathname = '/banners/delete/{{banner.id}}'
+        }
+    {{/if}}
+
+    $("#file").on('change', function () {
+        $("#submit").removeAttr("disabled");
+    });
+</script>
+{{/section}}

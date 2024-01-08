@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{#if department}}Edit Department {{department.name}}{{else}}Add New Department{{/if}}</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="form" action="/departments/{{#if department}}edit{{else}}add{{/if}}" enctype="multipart/form-data">
+                    <input type="hidden" id="id" name="id" value="{{department.id}}" />
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group">
+                                <span class="input-group-text">Name</span>
+                                <input class="form-control form-control-lg" name="name" placeholder="" autocomplete="off" value="{{department.name}}" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group">
+                                <span class="input-group-text">Short Name</span>
+                                <input class="form-control form-control-lg" name="short_name" placeholder="" autocomplete="off" value="{{department.short_name}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                            <a href="/departments/manage" class="btn btn-secondary">Back</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

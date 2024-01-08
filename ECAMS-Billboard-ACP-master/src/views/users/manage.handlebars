@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title mb-0">User Management</h5>
+                    </div>
+                    <div class="col-auto ms-auto text-end mt-n1">
+                        <a href="/users/add" class="btn btn-primary">New User</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                {{#if users.length}}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each users}}
+                            <tr>
+                                <td>{{inc @index}}</td>
+                                <td class="text-center">{{name}}</td>
+                                <td class="text-center">{{email}}</td>
+                                <td class="text-center">
+                                    {{#ifEquals id ../user.id}}
+
+                                    {{else}}
+                                        <a href="/users/edit/{{id}}" class="btn btn-md btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <a href="/users/delete/{{id}}" class="btn btn-md btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                    {{/ifEquals}}
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                {{else}}
+                    <div class="alert alert-info">
+                        You do not have access to edit any users
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

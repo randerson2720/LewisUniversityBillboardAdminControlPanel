@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title mb-0">Data Management</h5>
+                    </div>
+                    <div class="col-auto ms-auto text-end mt-n1">
+                        <a href="/data/add" class="btn btn-primary">New Professor</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                {{#if professors.length}}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Department</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Room</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each professors}}
+                        <tr>
+                            <td class="text-center">{{name}}</td>
+                            <td class="text-center">{{department}}</td>
+                            <td class="text-center">{{email}}</td>
+                            <td class="text-center">{{room}}</td>
+                            <td class="text-center">
+                                <a href="/data/edit/{{id}}" class="btn btn-md btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a href="/data/delete/{{id}}" class="btn btn-md btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{else}}
+                <div class="alert alert-info">
+                    You do not have access to edit any professors
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title mb-0">Banner Management</h5>
+                    </div>
+                    <div class="col-auto ms-auto text-end mt-n1">
+                        <a href="/banners/add" class="btn btn-primary">New Banner</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                {{#if banners.length}}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each banners}}
+                            <tr>
+                                <td>{{inc @index}}</td>
+                                <td class="text-center">{{name}}</td>
+                                <td class="text-center">
+                                    <a href="/banners/edit/{{id}}" class="btn btn-md btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a href="/banners/delete/{{id}}" class="btn btn-md btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                {{else}}
+                    <div class="alert alert-info">
+                        No banners found.
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
